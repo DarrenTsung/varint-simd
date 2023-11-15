@@ -6,6 +6,7 @@ use core::arch::x86_64::*;
 #[repr(align(16), C)]
 struct Align128<T>(T);
 
+#[cfg(any(target_feature = "ssse3", doc))]
 pub static LOOKUP_DOUBLE_VEC: [__m128i; 90] = unsafe {
     core::mem::transmute(Align128::<[u8; 1440]>([
         0, 255, 255, 255, 255, 255, 255, 255, 1, 255, 255, 255, 255, 255, 255, 255, // 1, 1
@@ -1128,6 +1129,7 @@ pub static LOOKUP_DOUBLE_STEP1: [(u8, u8, u8); 1024] = [
     (84, 11, 1), // 0b0000001111111111
 ];
 
+#[cfg(any(target_feature = "ssse3", doc))]
 pub static LOOKUP_QUAD_VEC: [__m128i; 81] = unsafe {
     core::mem::transmute(Align128::<[u8; 1296]>([
         0, 255, 255, 255, 1, 255, 255, 255, 2, 255, 255, 255, 3, 255, 255, 255, // 1, 1, 1, 1

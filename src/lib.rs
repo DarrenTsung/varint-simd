@@ -27,11 +27,13 @@ pub use encode::*;
 pub use num::*;
 
 // Functions to help with debugging
+#[cfg(any(target_feature = "ssse3", doc))]
 #[allow(dead_code)]
 fn slice_m128i(n: __m128i) -> [u8; 16] {
     unsafe { core::mem::transmute(n) }
 }
 
+#[cfg(any(target_feature = "ssse3", doc))]
 #[allow(dead_code)]
 fn slice_m256i(n: __m256i) -> [i8; 32] {
     unsafe { core::mem::transmute(n) }

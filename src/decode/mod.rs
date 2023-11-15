@@ -277,6 +277,7 @@ unsafe fn decode_two_u32_unsafe<T: VarIntTarget, U: VarIntTarget>(
 }
 
 #[inline(always)]
+#[cfg(any(target_feature = "ssse3", doc))]
 unsafe fn dual_u8_stage2(comb: __m128i) -> __m128i {
     _mm_or_si128(
         _mm_and_si128(comb, _mm_set_epi64x(0x000000000000007f, 0x000000000000007f)),
@@ -288,6 +289,7 @@ unsafe fn dual_u8_stage2(comb: __m128i) -> __m128i {
 }
 
 #[inline(always)]
+#[cfg(any(target_feature = "ssse3", doc))]
 unsafe fn dual_u16_stage2(comb: __m128i) -> __m128i {
     _mm_or_si128(
         _mm_or_si128(
@@ -305,6 +307,7 @@ unsafe fn dual_u16_stage2(comb: __m128i) -> __m128i {
 }
 
 #[inline(always)]
+#[cfg(any(target_feature = "ssse3", doc))]
 unsafe fn dual_u32_stage2(comb: __m128i) -> __m128i {
     _mm_or_si128(
         _mm_or_si128(
